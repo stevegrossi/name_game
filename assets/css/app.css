@@ -1,0 +1,211 @@
+@import "../../deps/phoenix_live_view/assets/css/live_view.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Luckiest Guy', sans-serif;
+  font-size: 100%;
+  background-color: #abdde5;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  /*transform: rotate(3.5deg);*/
+}
+.logo h1 {
+  font-size: 3em;
+  line-height: 1;
+  text-align: center;
+  color: #f9cf36;
+  text-shadow: 2px 2px 0px #fff, 1px 3px 3px rgba(0,0,0,.25);
+}
+.logo img {
+  display: block;
+  width: 6em;
+}
+
+.stage {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  max-width: 800px;
+  margin: 1em auto 3em;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.photo {
+  background: white;
+  padding: 1em;
+  margin: -2em 0 -2em 2em;
+  width: 35%;
+  min-width: 400px;
+  transform: rotate(-4deg);
+  box-shadow: 0 3px 5px rgba(0,0,0,.25);
+}
+
+.namecard {
+  flex-grow: 1;
+  padding: 1em;
+  font-size: 1.5em;
+  opacity: 0;
+  color: #f15035;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.5);
+}
+.namecard h2 {
+  font-size: 2em;
+}
+.namecard.revealed {
+  opacity: 1;
+}
+.placeholder {
+  color: #f15035;
+  margin-left: 1.5em;
+  font-size: 6em;
+  display: none;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.5);
+}
+.placeholder.revealed {
+  display: inline-block;
+}
+.buttons {
+  text-align: center;
+}
+.button {
+  color: #fff;
+  background-color: #00acad;
+  font-size: 2em;
+  padding: .5em 1em .25em;
+  border: none;
+  border-radius: .25em;
+  font-family: inherit;
+  line-height: 1em;
+  cursor: pointer;
+  position: relative;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.5);
+  box-shadow: 1px 1px 0 rgba(0,0,0,.5);
+}
+.button:active {
+  top: 2px;
+}
+
+.starburst {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+.starburst * {
+  z-index: 0;
+}
+.starburst--both {
+  overflow: hidden;
+  background-image:
+  linear-gradient(0deg, transparent 50%, #0576d3 50%),
+  linear-gradient(11deg, transparent 50%, #2887e5 50%),
+  linear-gradient(22deg, transparent 50%, #0576d3 50%),
+  linear-gradient(33deg, transparent 50%, #2887e5 50%),
+  linear-gradient(44deg, transparent 50%, #0576d3 50%),
+  linear-gradient(55deg, transparent 50%, #2887e5 50%),
+  linear-gradient(66deg, transparent 50%, #0576d3 50%),
+  linear-gradient(77deg, transparent 50%, #2887e5 50%),
+  linear-gradient(88deg, transparent 50%, #0576d3 50%),
+  linear-gradient(99deg, transparent 50%, #2887e5 50%),
+  linear-gradient(110deg, transparent 50%, #0576d3 50%),
+  linear-gradient(121deg, transparent 50%, #2887e5 50%),
+  linear-gradient(132deg, transparent 50%, #0576d3 50%),
+  linear-gradient(143deg, transparent 50%, #2887e5 50%),
+  linear-gradient(154deg, transparent 50%, #0576d3 50%),
+  linear-gradient(165deg, transparent 50%, #2887e5 50%),
+  linear-gradient(176deg, transparent 50%, #0576d3 50%),
+  linear-gradient(187deg, transparent 50%, #2887e5 50%),
+  linear-gradient(198deg, transparent 50%, #0576d3 50%),
+  linear-gradient(209deg, transparent 50%, #2887e5 50%),
+  linear-gradient(220deg, transparent 50%, #0576d3 50%),
+  linear-gradient(231deg, transparent 50%, #2887e5 50%),
+  linear-gradient(242deg, transparent 50%, #0576d3 50%),
+  linear-gradient(253deg, transparent 50%, #2887e5 50%),
+  linear-gradient(264deg, transparent 50%, #0576d3 50%),
+  linear-gradient(275deg, transparent 50%, #2887e5 50%),
+  linear-gradient(286deg, transparent 50%, #0576d3 50%),
+  linear-gradient(297deg, transparent 50%, #2887e5 50%),
+  linear-gradient(308deg, transparent 50%, #0576d3 50%),
+  linear-gradient(319deg, transparent 50%, #2887e5 50%),
+  linear-gradient(330deg, transparent 50%, #0576d3 50%),
+  linear-gradient(341deg, transparent 50%, #2887e5 50%),
+  linear-gradient(352deg, transparent 50%, #0576d3 50%);
+}
+.starburst--both::before {
+  background-image:
+  linear-gradient(180deg, transparent 50%, #0576d3 50%),
+  linear-gradient(191deg, transparent 50%, #2887e5 50%),
+  linear-gradient(202deg, transparent 50%, #0576d3 50%),
+  linear-gradient(213deg, transparent 50%, #2887e5 50%),
+  linear-gradient(224deg, transparent 50%, #0576d3 50%),
+  linear-gradient(235deg, transparent 50%, #2887e5 50%),
+  linear-gradient(246deg, transparent 50%, #0576d3 50%),
+  linear-gradient(257deg, transparent 50%, #2887e5 50%),
+  linear-gradient(268deg, transparent 50%, #0576d3 50%),
+  linear-gradient(279deg, transparent 50%, #2887e5 50%),
+  linear-gradient(290deg, transparent 50%, #0576d3 50%),
+  linear-gradient(301deg, transparent 50%, #2887e5 50%),
+  linear-gradient(312deg, transparent 50%, #0576d3 50%),
+  linear-gradient(323deg, transparent 50%, #2887e5 50%),
+  linear-gradient(334deg, transparent 50%, #0576d3 50%),
+  linear-gradient(345deg, transparent 50%, #2887e5 50%),
+  linear-gradient(356deg, transparent 50%, #0576d3 50%);
+}
+.starburst--both::after {
+  top: 50% !important;
+  background-position: 0 100%;
+  background-size: 100% 200%;
+  background-image:
+  linear-gradient(0deg, transparent 50%, #0576d3 50%),
+  linear-gradient(11deg, transparent 50%, #2887e5 50%),
+  linear-gradient(22deg, transparent 50%, #0576d3 50%),
+  linear-gradient(33deg, transparent 50%, #2887e5 50%),
+  linear-gradient(44deg, transparent 50%, #0576d3 50%),
+  linear-gradient(55deg, transparent 50%, #2887e5 50%),
+  linear-gradient(66deg, transparent 50%, #0576d3 50%),
+  linear-gradient(77deg, transparent 50%, #2887e5 50%),
+  linear-gradient(88deg, transparent 50%, #0576d3 50%),
+  linear-gradient(99deg, transparent 50%, #2887e5 50%),
+  linear-gradient(110deg, transparent 50%, #0576d3 50%),
+  linear-gradient(121deg, transparent 50%, #2887e5 50%),
+  linear-gradient(132deg, transparent 50%, #0576d3 50%),
+  linear-gradient(143deg, transparent 50%, #2887e5 50%),
+  linear-gradient(154deg, transparent 50%, #0576d3 50%),
+  linear-gradient(165deg, transparent 50%, #2887e5 50%),
+  linear-gradient(176deg, transparent 50%, #0576d3 50%);
+}
+.starburst--both::before,
+.starburst--both::after {
+  top: 0;
+  left: 0;
+  content: "";
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.starburst div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(125,185,232,0) 0%, rgba(124,183,230,0) 1%, rgba(0,0,0,1) 100%);
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(125,185,232,0) 0%,rgba(124,183,230,0) 1%,rgba(0,0,0,1) 100%);
+  background: radial-gradient(ellipse at center,  rgba(125,185,232,0) 0%,rgba(124,183,230,0) 1%,rgba(0,0,0,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', endColorstr='#000000',GradientType=1 );
+}

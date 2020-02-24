@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title><%= "¿Cómo Te Llamas?" %></title>
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <%= csrf_meta_tag() %>
+  </head>
+  <body>
+    <section class="starburst starburst--both">
+      <div></div> <!-- this div is only used for the vignette -->
+    </section>
+    <header class="logo">
+      <h1>¿Cómo Te Llamas?</h1>
+      <img width="138" src="/images/ollie.png" alt="" />
+    </header>
+    <main role="main" class="container">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>
