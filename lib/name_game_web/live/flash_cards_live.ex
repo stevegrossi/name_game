@@ -8,6 +8,7 @@ defmodule NameGameWeb.FlashCardsLive do
       end)
 
     socket = assign(socket, :people, data)
+    socket = assign(socket, :count, 1)
     socket = assign(socket, :current, List.first(socket.assigns.people).name)
     socket = assign(socket, :revealed, false)
     {:ok, socket}
@@ -21,6 +22,9 @@ defmodule NameGameWeb.FlashCardsLive do
 
     ~L"""
     <div class="stage">
+      <div class="count">
+        <%= @count %> / <%= Enum.count(@people) %>
+      </div>
       <img class="photo" src="<%= current.photo %>" alt="" />
       <div class="placeholder <%= if not @revealed, do: "revealed" %>">?</div>
       <div class="namecard <%= if @revealed, do: "revealed" %>">
@@ -39,6 +43,7 @@ defmodule NameGameWeb.FlashCardsLive do
   end
 
   def handle_event("shuffle", _event, socket) do
+    socket = update(socket, :count, &(&1 + 1))
     socket = assign(socket, :revealed, false)
     socket = assign(socket, :current, Enum.random(socket.assigns.people).name)
     {:noreply, socket}

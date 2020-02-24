@@ -39,6 +39,7 @@ body {
   margin: 1em auto 3em;
   background-color: rgba(255,255,255,0.5);
   border-radius: .5em;
+  position: relative;
 }
 
 .photo {
@@ -221,4 +222,14 @@ body {
   100% {
     transform: rotate(2deg);
   }
+}
+
+.count {
+  position: absolute;
+  top: -.5em;
+  right: -.5em;
+  color: #fff;
+  background-color: #f15035;
+  padding: .5em;
+  border-radius: .5em;
 }
