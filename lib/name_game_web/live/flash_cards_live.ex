@@ -6,7 +6,7 @@ defmodule NameGameWeb.FlashCardsLive do
     socket = assign(socket, :people, data)
     socket = assign(socket, :count, 1)
     socket = assign(socket, :done, false)
-    socket = assign(socket, :current_id, List.first(data).photo)
+    socket = assign(socket, :current_person, List.first(data))
     socket = assign(socket, :revealed, false)
     socket = assign(socket, :total, Enum.count(data))
 
@@ -14,11 +14,6 @@ defmodule NameGameWeb.FlashCardsLive do
   end
 
   def render(assigns) do
-    current_person =
-      Enum.find(assigns.people, fn(person) ->
-        person.photo == assigns.current_id
-      end)
-
     ~L"""
     <div class="stage">
       <div class="count">
@@ -30,20 +25,20 @@ defmodule NameGameWeb.FlashCardsLive do
           <p>Feeling ambitious? Refresh the page to start over!</p>
         </div>
       <% else %>
-        <img class="photo" src="<%= current_person.photo %>" alt="" />
+        <img class="photo" src="<%= @current_person.photo %>" alt="" />
         <div class="placeholder <%= if not @revealed, do: "revealed" %>">?</div>
         <div class="namecard <%= if @revealed, do: "revealed" %>">
-          <h2><%= current_person.name %></h2>
-          <p><%= current_person.title %></p>
+          <h2><%= @current_person.name %></h2>
+          <p><%= @current_person.title %></p>
         </div>
       <% end %>
     </div>
     <%= if not @done do %>
       <p class="buttons">
         <%= if @revealed do %>
-          <button class="button" phx-click="next">Another!</button>
+          <button id="next" class="button" phx-click="next">Another!</button>
         <% else %>
-          <button class="button" phx-click="reveal">Show me!</button>
+          <button id="reveal" class="button" phx-click="reveal">Show me!</button>
         <% end %>
       </p>
     <% end %>
@@ -55,12 +50,13 @@ defmodule NameGameWeb.FlashCardsLive do
     {:noreply, socket}
   end
   def handle_event("next", _event, socket) do
+    updated_people = Enum.reject(socket.assigns.people, fn(person) ->
+      person.photo == socket.assigns.current_person.photo
+    end)
     socket = update(socket, :count, &(&1 + 1))
     socket = assign(socket, :revealed, false)
-    socket = assign(socket, :people, Enum.reject(socket.assigns.people, fn(person) ->
-      person.photo == socket.assigns.current_id
-    end))
-    socket = assign(socket, :current_id, Enum.random(socket.assigns.people).photo)
+    socket = assign(socket, :people, updated_people)
+    socket = assign(socket, :current_person, Enum.random(updated_people))
     {:noreply, socket}
   end
 
