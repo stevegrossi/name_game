@@ -242,3 +242,15 @@ body {
   padding: .5em;
   border-radius: .5em;
 }
+
+.done {
+  color: #f15035;
+  text-shadow: 0px 0px 5px #fff;
+  text-align: center;
+  padding: 2em;
+  margin: auto;
+  font-size: 1.5em;
+}
+.done h2 {
+  font-size: 3em;
+}
