@@ -9,9 +9,10 @@ defmodule NameGame.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      NameGameWeb.Endpoint
+      NameGameWeb.Endpoint,
       # Starts a worker by calling: NameGame.Worker.start_link(arg)
       # {NameGame.Worker, arg},
+      {ConCache, [name: :data_cache, ttl_check_interval: false]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

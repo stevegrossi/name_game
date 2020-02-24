@@ -41,7 +41,8 @@ defmodule NameGame.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.6"},
       {:floki, "~> 0.26.0"},
-      {:phoenix_live_view, "~> 0.7.1"}
+      {:phoenix_live_view, "~> 0.7.1"},
+      {:con_cache, "~> 0.13"}
     ]
   end
 end

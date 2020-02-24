@@ -2,7 +2,12 @@ defmodule NameGameWeb.FlashCardsLive do
   use Phoenix.LiveView
 
   def mount(_params, _session, socket) do
-    socket = assign(socket, :people, fetch_data())
+    data =
+      ConCache.get_or_store(:data_cache, :data, fn() ->
+        fetch_data()
+      end)
+
+    socket = assign(socket, :people, data)
     socket = assign(socket, :current, List.first(socket.assigns.people).name)
     socket = assign(socket, :revealed, false)
     {:ok, socket}
