@@ -6,10 +6,19 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Luckiest Guy', sans-serif;
   font-size: 100%;
   background-color: #abdde5;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
 }
 
 .logo {
