@@ -3,8 +3,6 @@ defmodule NameGameWeb.FlashCardsLive do
 
   alias NameGame.Store
 
-  @ignored_names ["Ollie Llama"]
-
   def mount(_params, _session, socket) do
     [current_person | remaining_people] = load_people()
     socket = assign(socket,
@@ -71,9 +69,6 @@ defmodule NameGameWeb.FlashCardsLive do
 
   defp load_people() do
     Store.get_people()
-    |> Enum.reject(fn(person) ->
-        person.name in @ignored_names
-      end)
     |> Enum.shuffle
   end
 end
