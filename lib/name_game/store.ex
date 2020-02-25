@@ -26,6 +26,7 @@ defmodule NameGame.Store do
           }
         end)
       |> Enum.reject(&(&1.name in @ignored_names))
+      |> Enum.uniq_by(&(&1.photo))
     end)
   end
 end
