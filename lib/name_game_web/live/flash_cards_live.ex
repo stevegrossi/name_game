@@ -1,6 +1,8 @@
 defmodule NameGameWeb.FlashCardsLive do
   use Phoenix.LiveView
 
+  alias NameGame.Store
+
   def mount(_params, _session, socket) do
     data = load_data()
     socket = assign(socket, :people, data)
@@ -65,23 +67,12 @@ defmodule NameGameWeb.FlashCardsLive do
     {:noreply, socket}
   end
 
-  defp load_data() do
-    ConCache.get_or_store(:data_cache, :data, fn() ->
-      HTTPoison.start
-      response = HTTPoison.get!("https://www.lessonly.com/team/")
-      {:ok, document} = Floki.parse_document(response.body)
-      members = Floki.find(document, ".team-member")
-      Enum.map(members, fn(member_node) ->
-        [photo] = Floki.attribute(member_node, ".team-member-photo .photo-hover", "data-src")
-        name = Floki.find(member_node, ".team-member-name") |> Floki.text
-        title = Floki.find(member_node, ".team-member-title") |> Floki.text
-        %{
-          name: name,
-          title: title,
-          photo: photo
-        }
+  defp load_people() do
+    Store.get_people()
+    |> Enum.reject(fn(person) ->
+        person.name in @ignored_names
       end)
-    end)
+    |> Enum.shuffle
   end
 end
 
