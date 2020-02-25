@@ -3,14 +3,17 @@ defmodule NameGameWeb.FlashCardsLive do
 
   alias NameGame.Store
 
+  @ignored_names ["Ollie Llama"]
+
   def mount(_params, _session, socket) do
-    data = load_data()
-    socket = assign(socket, :people, data)
-    socket = assign(socket, :count, 1)
-    socket = assign(socket, :done, false)
-    socket = assign(socket, :current_person, List.first(data))
-    socket = assign(socket, :revealed, false)
-    socket = assign(socket, :total, Enum.count(data))
+    [current_person | remaining_people] = load_people()
+    socket = assign(socket,
+      people: remaining_people,
+      done: false,
+      current_person: current_person,
+      revealed: false,
+      total: length(remaining_people) + 1,
+    )
 
     {:ok, socket}
   end
@@ -19,7 +22,7 @@ defmodule NameGameWeb.FlashCardsLive do
     ~L"""
     <div class="stage">
       <div class="count">
-        <%= @count %> / <%= @total %>
+        <%= @total - length(@people) %> / <%= @total %>
       </div>
       <%= if @done do %>
         <div class="done">
@@ -47,18 +50,17 @@ defmodule NameGameWeb.FlashCardsLive do
     """
   end
 
-  def handle_event("next", _event, %{assigns: %{count: _same, total: _same}} = socket) do
+  def handle_event("next", _event, %{assigns: %{people: []}} = socket) do
     socket = assign(socket, :done, true)
     {:noreply, socket}
   end
   def handle_event("next", _event, socket) do
-    updated_people = Enum.reject(socket.assigns.people, fn(person) ->
-      person.photo == socket.assigns.current_person.photo
-    end)
-    socket = update(socket, :count, &(&1 + 1))
-    socket = assign(socket, :revealed, false)
-    socket = assign(socket, :people, updated_people)
-    socket = assign(socket, :current_person, Enum.random(updated_people))
+    [current_person | remaining_people] = socket.assigns.people
+    socket = assign(socket,
+      revealed: false,
+      current_person: current_person,
+      people: remaining_people
+    )
     {:noreply, socket}
   end
 
