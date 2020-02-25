@@ -1,4 +1,14 @@
-# NameGame
+# ¿Cómo Te Llamas? 🦙
+
+(Lessonly employees call ourselves “llamas” 😉)
+
+This is a small, simple Phoenix LiveView app that turns the [Lessonly Team page](https://www.lessonly.com/team/) into a set of flashcards to help me and others learn our colleagues’ names. [Check it out here!](https://namegame.stevegrossi.com/)
+
+## Development
+
+Clone the repository.
+
+You’ll need Erlang and Elixir installed. [asdf](https://asdf-vm.com/#/) makes this as easy as running `asdf install` from the project directory.
 
 To start your Phoenix server:
 
@@ -7,13 +17,3 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
