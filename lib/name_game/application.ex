@@ -12,7 +12,8 @@ defmodule NameGame.Application do
       NameGameWeb.Endpoint,
       # Starts a worker by calling: NameGame.Worker.start_link(arg)
       # {NameGame.Worker, arg},
-      {ConCache, [name: :data_cache, ttl_check_interval: :timer.minutes(1), global_ttl: :timer.hours(24)]}
+      {ConCache,
+       [name: :data_cache, ttl_check_interval: :timer.minutes(1), global_ttl: :timer.hours(24)]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
