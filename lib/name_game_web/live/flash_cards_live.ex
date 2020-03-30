@@ -5,13 +5,15 @@ defmodule NameGameWeb.FlashCardsLive do
 
   def mount(_params, _session, socket) do
     [current_person | remaining_people] = load_people()
-    socket = assign(socket,
-      people: remaining_people,
-      done: false,
-      current_person: current_person,
-      revealed: false,
-      total: length(remaining_people) + 1,
-    )
+
+    socket =
+      assign(socket,
+        people: remaining_people,
+        done: false,
+        current_person: current_person,
+        revealed: false,
+        total: length(remaining_people) + 1
+      )
 
     {:ok, socket}
   end
@@ -52,13 +54,17 @@ defmodule NameGameWeb.FlashCardsLive do
     socket = assign(socket, :done, true)
     {:noreply, socket}
   end
+
   def handle_event("next", _event, socket) do
     [current_person | remaining_people] = socket.assigns.people
-    socket = assign(socket,
-      revealed: false,
-      current_person: current_person,
-      people: remaining_people
-    )
+
+    socket =
+      assign(socket,
+        revealed: false,
+        current_person: current_person,
+        people: remaining_people
+      )
+
     {:noreply, socket}
   end
 
@@ -69,7 +75,6 @@ defmodule NameGameWeb.FlashCardsLive do
 
   defp load_people() do
     Store.get_people()
-    |> Enum.shuffle
+    |> Enum.shuffle()
   end
 end
-
