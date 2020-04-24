@@ -34,15 +34,18 @@ defmodule NameGame.MixProject do
     [
       {:phoenix, "~> 1.4.14"},
       {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_html, "~> 2.14"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.2"},
+      {:phoenix_live_view, "~> 0.7"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:httpoison, "~> 1.6"},
       {:floki, "~> 0.26.0"},
-      {:phoenix_live_view, "~> 0.7"},
-      {:con_cache, "~> 0.13"}
+      {:con_cache, "~> 0.13"},
+      {:telemetry_poller, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.4"}
     ]
   end
 end
