@@ -1,5 +1,6 @@
 defmodule NameGameWeb.Router do
   use NameGameWeb, :router
+  import Phoenix.LiveDashboard.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -18,5 +19,12 @@ defmodule NameGameWeb.Router do
     pipe_through :browser
 
     live "/", FlashCardsLive
+  end
+
+  if Mix.env() == :dev do
+    scope "/" do
+      pipe_through :browser
+      live_dashboard "/dashboard", metrics: NameGameWeb.Telemetry
+    end
   end
 end

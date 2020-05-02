@@ -8,6 +8,8 @@ defmodule NameGame.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      # Telemetry metrics
+      NameGameWeb.Telemetry,
       # Start the endpoint when the application starts
       NameGameWeb.Endpoint,
       # Starts a worker by calling: NameGame.Worker.start_link(arg)
