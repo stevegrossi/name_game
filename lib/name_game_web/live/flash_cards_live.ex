@@ -1,5 +1,5 @@
 defmodule NameGameWeb.FlashCardsLive do
-  use Phoenix.LiveView
+  use Phoenix.LiveView, layout: {NameGameWeb.LayoutView, "live.html"}
 
   alias NameGame.Store
 
