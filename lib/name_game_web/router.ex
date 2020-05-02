@@ -19,12 +19,8 @@ defmodule NameGameWeb.Router do
     pipe_through :browser
 
     live "/", FlashCardsLive
-  end
 
-  if Mix.env() == :dev do
-    scope "/" do
-      pipe_through :browser
-      live_dashboard "/dashboard", metrics: NameGameWeb.Telemetry
-    end
+    # For a real app, this would be behind authentication 😅
+    live_dashboard "/dashboard", metrics: NameGameWeb.Telemetry
   end
 end
