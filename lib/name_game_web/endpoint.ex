@@ -11,7 +11,7 @@ defmodule NameGameWeb.Endpoint do
   ]
 
   socket "/socket", NameGameWeb.UserSocket,
-    websocket: true,
+    websocket: [timeout: 45_000],
     longpoll: false
 
   socket "/live", Phoenix.LiveView.Socket

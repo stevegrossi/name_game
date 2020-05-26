@@ -10,9 +10,10 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :name_game, NameGameWeb.Endpoint,
-  url: [host: "namegame.stevegrossi.com", port: 443],
+  http: [port: {:system, "PORT"}],
+  url: [scheme: "https", host: "lessonly-name-game.herokuapp.com", port: 443],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  check_origin: ["//namegame.stevegrossi.com"],
+  # check_origin: ["//namegame.stevegrossi.com"],
   force_ssl: [rewrite_on: [:x_forwarded_proto]]
 
 # Do not print debug messages in production
