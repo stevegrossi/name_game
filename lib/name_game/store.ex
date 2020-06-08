@@ -9,7 +9,8 @@ defmodule NameGame.Store do
   def get_people() do
     ConCache.get_or_store(:data_cache, :data, fn ->
       HTTPoison.start()
-      response = HTTPoison.get!(@team_page)
+      # verify_none is a temporary fix for https://github.com/benoitc/hackney/issues/633
+      response = HTTPoison.get!(@team_page, [], ssl: [{:verify, :verify_none}])
       {:ok, document} = Floki.parse_document(response.body)
 
       document
