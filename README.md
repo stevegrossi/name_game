@@ -2,7 +2,7 @@
 
 (Lessonly employees call ourselves “llamas” 😉)
 
-This is a small, simple Phoenix LiveView app that turns the [Lessonly Team page](https://www.lessonly.com/team/) into a set of flashcards to help me and others learn our colleagues’ names. [Check it out here!](https://namegame.stevegrossi.com/)
+This is a small, simple Phoenix LiveView app that turns the [Lessonly Team page](https://www.lessonly.com/team/) into a set of flashcards to help me and others learn our colleagues’ names. [Check it out here!](https://lessonly-name-game.herokuapp.com/)
 
 ## Development
 
